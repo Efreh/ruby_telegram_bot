@@ -2,7 +2,9 @@ require 'candle'
 
 class LocalLLMRubyService
   def initialize
-    @llm = Candle::LLM.from_pretrained("deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", device: Candle::Device.best)
+    @llm = Candle::LLM.from_pretrained("Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+                                       device: Candle::Device.best,
+                                       gguf_file: "qwen2.5-1.5b-instruct-q2_k.gguf")
   end
 
   def generate_response(text)
