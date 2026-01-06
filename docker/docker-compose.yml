@@ -1,0 +1,10 @@
+services:
+  telegram_bot:
+    build:
+      context: ../src
+      additional_contexts:
+        docker: ../docker
+      dockerfile: ../docker/ruby/Dockerfile
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+    restart: unless-stopped
