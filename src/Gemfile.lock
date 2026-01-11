@@ -5,6 +5,7 @@ GEM
     afm (1.0.0)
     bigdecimal (3.3.1)
     concurrent-ruby (1.3.6)
+    connection_pool (3.0.2)
     dotenv (3.2.0)
     dry-core (1.2.0)
       concurrent-ruby (~> 1.0)
@@ -36,6 +37,11 @@ GEM
       multipart-post (~> 2.0)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
+    faraday-net_http_persistent (2.3.1)
+      faraday (~> 2.5)
+      net-http-persistent (>= 4.0.4, < 5)
+    faraday-retry (2.4.0)
+      faraday (~> 2.0)
     hashery (2.1.2)
     ice_nine (0.11.2)
     json (2.18.0)
@@ -43,6 +49,8 @@ GEM
     multipart-post (2.4.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
+    net-http-persistent (4.0.8)
+      connection_pool (>= 2.2.4, < 4)
     pdf-reader (2.15.1)
       Ascii85 (>= 1.0, < 3.0, != 2.0.0)
       afm (>= 0.2.1, < 2)
@@ -73,6 +81,8 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   faraday
+  faraday-net_http_persistent
+  faraday-retry
   pdf-reader
   rack
   red-candle
