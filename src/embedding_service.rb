@@ -50,10 +50,10 @@ class EmbeddingService
   def parse_txt(file_path)
     binary_data = File.binread(file_path)
     
-    ['UTF-8', 'Windows-1251', 'CP866'].each do |encoding|
+    ['Windows-1251', 'UTF-8', 'CP866'].each do |encoding|
       begin
         text = binary_data.dup.force_encoding(encoding).encode('UTF-8', invalid: :replace, undef: :replace)
-        return text if text.count('?').to_f / [text.length, 1].max <= 0.1
+        return text if text.valid_encoding? && text.count('?').to_f / [text.length, 1].max <= 0.05
       rescue Encoding::InvalidByteSequenceError, Encoding::UndefinedConversionError
         next
       end

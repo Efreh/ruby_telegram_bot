@@ -104,7 +104,7 @@ def handle_question(bot, message, question, llm_service, embedding_service, db_m
   LOGGER.info "Query from user #{message.from.username || message.from.id}: #{question[0..50]}..."
   
   query_embedding = embedding_service.embed(question)
-  similar_chunks = db_manager.find_similar_chunks(query_embedding, 3, min_similarity: 0.65)
+  similar_chunks = db_manager.find_similar_chunks(query_embedding, 3, min_similarity: 0.4)
 
   response = if similar_chunks.empty?
                "No documents found to answer this question."
