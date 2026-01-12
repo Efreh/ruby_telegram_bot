@@ -31,6 +31,7 @@ jobs:
         additional-contexts: docker=./docker
         file: ./docker/ruby/Dockerfile
         push: true
+        pull: true
         tags: ${{ secrets.DOCKER_USERNAME }}/ruby-telegram-bot:latest
         cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ruby-telegram-bot:buildcache
         cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ruby-telegram-bot:buildcache,mode=max
@@ -58,8 +59,8 @@ jobs:
                 - BOT_TOKEN=$BOT_TOKEN
               restart: unless-stopped
           EOF
-          docker compose pull
-          docker compose up -d
+          docker compose pull --ignore-pull-failures
+          docker compose up -d --force-recreate --pull always
       env:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
